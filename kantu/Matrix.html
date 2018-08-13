@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://www.nwmls.com" />
+<title>Matrix</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Matrix</td></tr>
+</thead><tbody>
+
+      <tr>
+        <td>open</td>
+        <td>/login/index.cfm</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>/html/body</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>clickAndWait</td>
+        <td>id=emxLoginSubmit</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>clickAndWait</td>
+        <td>link=Matrix</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>clickAndWait</td>
+        <td>//*[@id="ctl02_m_tdMenu"]/ul/li[2]/ul/li[2]/a/span</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>type</td>
+        <td>id=Fm15_Ctrl21_LB_TB</td>
+        <td>140,380,390,510-560,710</td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>//*[@id="m_ucSearchButtons_m_lbSearch"]/span</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>link=All</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>clickAndWait</td>
+        <td>//*[@id="m_lbExport"]/span</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>id=m_ddExport</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>select</td>
+        <td>id=m_ddExport</td>
+        <td>label=Full</td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>id=m_ddExport</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>click</td>
+        <td>link=Export</td>
+        <td></td>
+      </tr>
+
+
+      <tr>
+        <td>pause</td>
+        <td>3600000</td>
+        <td></td>
+      </tr>
+
+</tbody></table>
+<script>
+(function() {
+  try {
+    var evt = new CustomEvent('kantuSaveAndRunMacro', { detail: { html: document.documentElement.outerHTML } })
+    window.dispatchEvent(evt);
+
+    if (window.location.protocol === 'file:') {
+      var onInvokeSuccess = function () {
+        clearTimeout(timer)
+        window.removeEventListener('kantuInvokeSuccess', onInvokeSuccess)
+      }
+      var timer = setTimeout(function () {
+        alert("Error: It seems you need to enable File Access for Kantu in the extension settings.")
+      }, 2000)
+
+      window.addEventListener('kantuInvokeSuccess', onInvokeSuccess)
+    }
+  } catch (e) {
+    alert('Kantu Bookmarklet error: ' + e.toString());
+  }
+})();
+</script>
+</body>
+</html>

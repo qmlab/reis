@@ -1,0 +1,75 @@
+{
+  "CreationDate": "2018-8-13",
+  "Commands": [
+    {
+      "Command": "open",
+      "Target": "https://www.nwmls.com/login/index.cfm",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "/html/body",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "id=emxLoginSubmit",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "link=Matrix",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "//*[@id=\"ctl02_m_tdMenu\"]/ul/li[2]/ul/li[2]/a/span",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "id=Fm15_Ctrl21_LB_TB",
+      "Value": "140,380,390,510-560,710"
+    },
+    {
+      "Command": "click",
+      "Target": "//*[@id=\"m_ucSearchButtons_m_lbSearch\"]/span",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "link=All",
+      "Value": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "//*[@id=\"m_lbExport\"]/span",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "id=m_ddExport",
+      "Value": ""
+    },
+    {
+      "Command": "select",
+      "Target": "id=m_ddExport",
+      "Value": "label=Full"
+    },
+    {
+      "Command": "click",
+      "Target": "id=m_ddExport",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "link=Export",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "3600000",
+      "Value": ""
+    }
+  ]
+}
