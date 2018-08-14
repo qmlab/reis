@@ -17,16 +17,29 @@ class FileLoader {
     $dir = '/' . trim($dir, '/');
     $filenames = scandir($dir, SCANDIR_SORT_DESCENDING);
     $rst = Vector {};
-    foreach ($filenames as $fn) {
-      if (!in_array($fn, array('.', '..')) && strpos($fn, '(') === false) {
-        foreach ($this->loadFile($dir . '/' . $fn) await as $record) {
-          $rst[] = $record;
+    try {
+      foreach ($filenames as $fn) {
+        if (!in_array($fn, array('.', '..')) && strpos($fn, '(') === false) {
+          foreach ($this->loadFile($dir . '/' . $fn) await as $record) {
+            $rst[] = $record;
+          }
+          break;
         }
-        break;
+      }
+
+      echo 'Loaded ' . count($rst) . ' records' . PHP_EOL;
+    } catch (Exception $e){
+      echo $e->getMessage() . PHP_EOL;
+      return $rst;
+    }
+
+    foreach ($filenames as $fn) {
+      if (!in_array($fn, array('.', '..'))) {
+        echo 'Deleting file ' . $fn . PHP_EOL;
+        unlink($dir . '/' . $fn);
       }
     }
 
-    echo 'Loaded ' . count($rst) . ' records' . PHP_EOL;
     return $rst;
   }
 
