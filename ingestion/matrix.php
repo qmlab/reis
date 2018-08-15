@@ -5,12 +5,14 @@ class FileLoader {
   public function __construct(private string $api, private string $cacheFolder) {
   }
 
-  public async function process(): Awaitable<void> {
+  public function isReady(): bool {
     $filenames = scandir($this->cacheFolder);
-    if (in_array("Full.txt", $filenames)) {
-      await $this->deleteAll();
-      await $this->insertAll($this->cacheFolder);
-    }
+    return in_array("Full.txt", $filenames);
+  }
+
+  public async function process(): Awaitable<void> {
+    await $this->deleteAll();
+    await $this->insertAll($this->cacheFolder);
   }
 
   protected async function loadFiles(string $dir): Awaitable<Vector> {
@@ -92,6 +94,3 @@ class FileLoader {
     }
   }
 }
-
-$loader = new FileLoader("http://localhost:5000/homes", __DIR__ . "/../cache");
-HH\Asio\join($loader->process());

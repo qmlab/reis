@@ -1,8 +1,3 @@
 #!/bin/bash
-pushd /home/mian/qmlab/reis
-if [ -f /mnt/c/Users/maine/Downloads/Full.txt ]; then
-	mv /mnt/c/Users/maine/Downloads/*.txt cache/
-	hhvm ingestion/matrix.hh
-	date >> executions.log
-fi
-popd
+
+hhvm ./main/collector.php "http://localhost:5000/homes" "/mnt/c/Users/maine/Downloads/" >> log/collecor.log
