@@ -28,12 +28,14 @@ async function prepareFiles(string $srcDir, string $destDir): Awaitable<bool> {
   }
 
   $filenames = scandir($srcDir);
-  foreach ($filenames as $fn) {
-    if (substr($fn, 0, 4) === "Full" && substr($fn, -4) === ".txt") {
-      copy(combine($srcDir, $fn), combine($destDir, $fn));
-      l("Source data file copied to cache folder");
-      unlink(combine($srcDir, $fn));
-      l("Source data file deleted");
+  if (count($filenames) > 0) {
+    foreach ($filenames as $fn) {
+      if (substr($fn, 0, 4) === "Full" && substr($fn, -4) === ".txt") {
+        copy(combine($srcDir, $fn), combine($destDir, $fn));
+        l("Source data file copied to cache folder");
+        unlink(combine($srcDir, $fn));
+        l("Source data file deleted");
+      }
     }
   }
 
