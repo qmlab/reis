@@ -46,7 +46,7 @@ class MongoClient {
     }
 
     protected async function findInternal(string $filter = "", int $page = 1): Awaitable<array> {
-      $res = $this->client->request('GET', $this->db . "?page=$page&where={" . $filter . "}");
+      $res = $this->client->request('GET', $this->db . "?max_results=200&page=$page&where={" . $filter . "}");
       $json = json_decode($res->getBody() . PHP_EOL);
       return $json->_items;
     }
