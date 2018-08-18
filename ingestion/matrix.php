@@ -1,5 +1,5 @@
 <?hh // partial
-require __DIR__ . '/../vendor/autoload.php';
+require_once(__DIR__."/../vendor/autoload.php");
 
 class FileLoader {
   public function __construct(private string $api, private string $cacheFolder) {
