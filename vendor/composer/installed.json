@@ -1,21 +1,21 @@
 [
     {
         "name": "facebook/xhp-lib",
-        "version": "v2.4.0",
-        "version_normalized": "2.4.0.0",
+        "version": "v2.6.0",
+        "version_normalized": "2.6.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/facebook/xhp-lib.git",
-            "reference": "aff764effe546739b19fd59082e92e37ecbc43c8"
+            "url": "https://github.com/hhvm/xhp-lib.git",
+            "reference": "47dda17c5c765dccde440d004bdd8c5d5a5b0457"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/aff764effe546739b19fd59082e92e37ecbc43c8",
-            "reference": "aff764effe546739b19fd59082e92e37ecbc43c8",
+            "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/47dda17c5c765dccde440d004bdd8c5d5a5b0457",
+            "reference": "47dda17c5c765dccde440d004bdd8c5d5a5b0457",
             "shasum": ""
         },
         "require": {
-            "hhvm": "~3.12",
+            "hhvm": "~3.23",
             "hhvm/hhvm-autoload": "^1.5",
             "hhvm/type-assert": "^3.0"
         },
@@ -23,7 +23,7 @@
             "91carriage/phpunit-hhi": "^5.1.0",
             "phpunit/phpunit": "^5.1.0"
         },
-        "time": "2017-09-28T18:09:22+00:00",
+        "time": "2018-05-10T16:25:59+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

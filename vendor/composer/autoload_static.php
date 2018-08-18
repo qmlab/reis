@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdeb3115697541b05042fed78517179dd
+class ComposerStaticInit7703e845e63ab76b75da3315371f7244
 {
     public static $files = array (
         '81d6993f34ba74cf9a0ff12cc099912b' => __DIR__ . '/..' . '/hhvm/hhvm-autoload/src/AutoloadMap.php',
@@ -77,9 +77,9 @@ class ComposerStaticInitdeb3115697541b05042fed78517179dd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdeb3115697541b05042fed78517179dd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdeb3115697541b05042fed78517179dd::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitdeb3115697541b05042fed78517179dd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7703e845e63ab76b75da3315371f7244::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7703e845e63ab76b75da3315371f7244::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7703e845e63ab76b75da3315371f7244::$classMap;
 
         }, null, ClassLoader::class);
     }
