@@ -9,11 +9,12 @@
  *
  */
 
-abstract class :xhp implements XHPChild {
+abstract class :xhp implements XHPChild, JsonSerializable {
   public function __construct(
     KeyedTraversable<string, mixed> $attributes,
     Traversable<XHPChild> $children,
-  ): void {}
+  ): void {
+  }
   abstract public function appendChild(mixed $child): this;
   abstract public function prependChild(mixed $child): this;
   abstract public function replaceChildren(...): this;
@@ -51,9 +52,38 @@ abstract class :xhp implements XHPChild {
    * production. You should still leave it on while developing new features,
    * though.
    */
-  public static bool $ENABLE_VALIDATION = true;
+  private static bool $validateChildren = true;
+  private static bool $validateAttributes = false;
+
+  public static function disableChildValidation(): void {
+    self::$validateChildren = false;
+  }
+
+  public static function enableChildValidation(): void {
+    self::$validateChildren = true;
+  }
+
+  public static function isChildValidationEnabled(): bool {
+    return self::$validateChildren;
+  }
+
+  public static function disableAttributeValidation(): void {
+    self::$validateAttributes = false;
+  }
+
+  public static function enableAttributeValidation(): void {
+    self::$validateAttributes = true;
+  }
+
+  public static function isAttributeValidationEnabled(): bool {
+    return self::$validateAttributes;
+  }
 
   final public function __toString(): string {
+    return $this->toString();
+  }
+
+  final public function jsonSerialize(): string {
     return $this->toString();
   }
 

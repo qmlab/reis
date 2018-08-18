@@ -1,7 +1,6 @@
 {
     "require": {
-        "hhvm/asio-utilities": "^2.4",
         "guzzlehttp/guzzle": "^6.3",
-	      "facebook/xhp-lib": "~2.2"
+	"facebook/xhp-lib": "2.4"
     }
 }

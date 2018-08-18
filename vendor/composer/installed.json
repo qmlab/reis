@@ -1,27 +1,29 @@
 [
     {
         "name": "facebook/xhp-lib",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
+        "version": "v2.4.0",
+        "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/facebook/xhp-lib.git",
-            "reference": "571674608bb099c2ce01952816f606e6781dd475"
+            "reference": "aff764effe546739b19fd59082e92e37ecbc43c8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/571674608bb099c2ce01952816f606e6781dd475",
-            "reference": "571674608bb099c2ce01952816f606e6781dd475",
+            "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/aff764effe546739b19fd59082e92e37ecbc43c8",
+            "reference": "aff764effe546739b19fd59082e92e37ecbc43c8",
             "shasum": ""
         },
         "require": {
-            "hhvm": "~3.6"
+            "hhvm": "~3.12",
+            "hhvm/hhvm-autoload": "^1.5",
+            "hhvm/type-assert": "^3.0"
         },
         "require-dev": {
             "91carriage/phpunit-hhi": "^5.1.0",
             "phpunit/phpunit": "^5.1.0"
         },
-        "time": "2016-03-28T21:09:59+00:00",
+        "time": "2017-09-28T18:09:22+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -29,11 +31,6 @@
             }
         },
         "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "BSD-3-Clause"
@@ -46,6 +43,46 @@
             "hhvm",
             "xhp"
         ]
+    },
+    {
+        "name": "fredemmott/hack-error-suppressor",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fredemmott/hack-error-suppressor.git",
+            "reference": "cb145c771b50f4f4eeec8c9cac4740df3d486a12"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fredemmott/hack-error-suppressor/zipball/cb145c771b50f4f4eeec8c9cac4740df3d486a12",
+            "reference": "cb145c771b50f4f4eeec8c9cac4740df3d486a12",
+            "shasum": ""
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "^5.6",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-05-02T03:07:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "ISC"
+        ],
+        "authors": [
+            {
+                "name": "Fred Emmott",
+                "email": "fred@fredemmott.co.uk"
+            }
+        ],
+        "description": "Suppress HHVM's automatic conversion of typechecker errors to fatals.",
+        "abandoned": true
     },
     {
         "name": "guzzlehttp/guzzle",
@@ -235,38 +272,126 @@
         ]
     },
     {
-        "name": "hhvm/asio-utilities",
-        "version": "v2.4",
-        "version_normalized": "2.4.0.0",
+        "name": "hhvm/hhvm-autoload",
+        "version": "v1.6.6",
+        "version_normalized": "1.6.6.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/hhvm/asio-utilities.git",
-            "reference": "02c7dcc339551a88e0e29cc316489aa6100d4db9"
+            "url": "https://github.com/hhvm/hhvm-autoload.git",
+            "reference": "2808fe06fa850532270c54155c0bdab1bf0f67da"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hhvm/asio-utilities/zipball/02c7dcc339551a88e0e29cc316489aa6100d4db9",
-            "reference": "02c7dcc339551a88e0e29cc316489aa6100d4db9",
+            "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/2808fe06fa850532270c54155c0bdab1bf0f67da",
+            "reference": "2808fe06fa850532270c54155c0bdab1bf0f67da",
             "shasum": ""
         },
         "require": {
-            "hhvm": "~3.11.0 | ~3.12.0"
+            "composer-plugin-api": "^1.0",
+            "fredemmott/hack-error-suppressor": "^1.0",
+            "hhvm": "^3.23"
         },
-        "time": "2015-12-10T19:57:28+00:00",
+        "replace": {
+            "facebook/hhvm-autoload": "1.*"
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "^5.5",
+            "facebook/fbexpect": "^1.1",
+            "phpunit/phpunit": "^5.5"
+        },
+        "time": "2018-06-12T20:21:07+00:00",
+        "bin": [
+            "bin/hh-autoload"
+        ],
+        "type": "composer-plugin",
+        "extra": {
+            "class": [
+                "Facebook\\AutoloadMap\\ComposerPlugin"
+            ]
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/Writer.php",
+                "src/"
+            ],
+            "files": [
+                "src/AutoloadMap.php",
+                "src/Config.php",
+                "src/TypeAssert.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/"
+    },
+    {
+        "name": "hhvm/hsl",
+        "version": "v3.27.2",
+        "version_normalized": "3.27.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hhvm/hsl.git",
+            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hhvm/hsl/zipball/c3d4725367c131c80dc65b765f9fdd6075475e63",
+            "reference": "c3d4725367c131c80dc65b765f9fdd6075475e63",
+            "shasum": ""
+        },
+        "require": {
+            "hhvm": "^3.27.0",
+            "hhvm/hhvm-autoload": "^1.4"
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "^5.7",
+            "facebook/fbexpect": "^1.0.0",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2018-08-08T16:18:28+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
+            "MIT"
         ],
-        "description": "Utilities to make working with async functions easier",
-        "homepage": "https://github.com/hhvm/asio-utilities",
+        "description": "The Hack Standard Library"
+    },
+    {
+        "name": "hhvm/type-assert",
+        "version": "v3.2.2",
+        "version_normalized": "3.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/hhvm/type-assert.git",
+            "reference": "9bbe7cac2ff831142d74203479e72046cbc932f8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/hhvm/type-assert/zipball/9bbe7cac2ff831142d74203479e72046cbc932f8",
+            "reference": "9bbe7cac2ff831142d74203479e72046cbc932f8",
+            "shasum": ""
+        },
+        "require": {
+            "hhvm": "^3.23.0",
+            "hhvm/hhvm-autoload": "^1.4",
+            "hhvm/hsl": "^1.0|^3.26.0"
+        },
+        "require-dev": {
+            "91carriage/phpunit-hhi": "~5.1",
+            "facebook/fbexpect": "^0.4.0|^1.0.0",
+            "phpunit/phpunit": "~5.1"
+        },
+        "time": "2018-05-09T18:23:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Convert untyped data to typed data",
         "keywords": [
-            "asio",
-            "async",
-            "facebook",
-            "hack",
-            "hhvm"
+            "TypeAssert",
+            "hack"
         ]
     },
     {

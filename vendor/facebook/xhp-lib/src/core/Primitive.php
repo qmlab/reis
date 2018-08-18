@@ -19,7 +19,7 @@ abstract class :x:primitive extends :x:composable-element implements XHPRoot {
   abstract protected function stringify(): string;
 
   final public function toString(): string {
-    return $this->asyncToString()->getWaitHandle()->join();
+    return \HH\Asio\join($this->asyncToString());
   }
 
   final public async function asyncToString(): Awaitable<string> {
@@ -29,7 +29,7 @@ abstract class :x:primitive extends :x:composable-element implements XHPRoot {
 
   final private async function __flushElementChildren(): Awaitable<void> {
     $children = $this->getChildren();
-    $awaitables = Map { };
+    $awaitables = Map {};
     foreach ($children as $idx => $child) {
       if ($child instanceof :x:composable-element) {
         $child->__transferContext($this->getAllContexts());
@@ -47,7 +47,7 @@ abstract class :x:primitive extends :x:composable-element implements XHPRoot {
 
   final protected async function __flushSubtree(): Awaitable<:x:primitive> {
     await $this->__flushElementChildren();
-    if (:xhp::$ENABLE_VALIDATION) {
+    if (:xhp::isChildValidationEnabled()) {
       $this->validateChildren();
     }
     return $this;

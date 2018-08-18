@@ -1,0 +1,11 @@
+language: php
+php:
+ - hhvm
+ - hhvm-nightly
+matrix:
+  allow_failures:
+  - php: hhvm
+script:
+ - ./.travis.sh
+notifications:
+  webhooks: https://code.facebook.com/travis/webhook/

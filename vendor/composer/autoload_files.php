@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '81d6993f34ba74cf9a0ff12cc099912b' => $vendorDir . '/hhvm/hhvm-autoload/src/AutoloadMap.php',
+    'ccb6bff793210f8c30c7091b8d03fc79' => $vendorDir . '/hhvm/hhvm-autoload/src/Config.php',
+    '8d609d786ee01083c01fb53fb2a450c6' => $vendorDir . '/hhvm/hhvm-autoload/src/TypeAssert.php',
     'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
     'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',

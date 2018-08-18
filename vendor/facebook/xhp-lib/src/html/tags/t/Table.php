@@ -10,16 +10,15 @@
  */
 
 class :table extends :xhp:html-element {
-  attribute int border, bool sortable;
+  attribute
+    int border,
+    bool sortable;
   category %flow;
   children (
     :caption?,
     :colgroup*,
     :thead?,
-    (
-      (:tfoot, (:tbody+ | :tr*)) |
-      ((:tbody+ | :tr*), :tfoot?)
-    )
+    ((:tfoot, (:tbody+ | :tr*)) | ((:tbody+ | :tr*), :tfoot?))
   );
   protected string $tagName = 'table';
 }

@@ -1,3 +1,5 @@
+!https://travis-ci.org/facebook/xhp-lib.svg?branch=master!:https://travis-ci.org/facebook/xhp-lib
+
 h1. Introduction
 
 XHP augments the syntax of Hack such that XML document fragments become valid
@@ -24,6 +26,10 @@ h1. Installation
     "facebook/xhp-lib": "2.x"
   }
 </pre></code>
+
+Run Composer commands using HHVM like so:
+
+bc. $ hhvm $(which composer) install;
 
 h1. Simple Example
 
@@ -179,7 +185,7 @@ bc. class :async-thing extends :x:element {
 }
 
 When an XHP tree is rendered, asyncRender() is called for all XHPAsync children,
-and data fetching happens in parrallel. This allows the data dependencies of
+and data fetching happens in parallel. This allows the data dependencies of
 your components to efficiently be an implementation detail instead of having
 to have it as part of the API and passed by the user (eg in an attribute).
 

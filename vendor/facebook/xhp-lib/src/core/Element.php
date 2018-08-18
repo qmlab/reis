@@ -20,7 +20,7 @@ abstract class :x:element extends :x:composable-element implements XHPRoot {
   abstract protected function render(): XHPRoot;
 
   final public function toString(): string {
-    return $this->asyncToString()->getWaitHandle()->join();
+    return \HH\Asio\join($this->asyncToString());
   }
 
   final public async function asyncToString(): Awaitable<string> {
@@ -35,7 +35,7 @@ abstract class :x:element extends :x:composable-element implements XHPRoot {
   }
 
   protected async function __renderAndProcess(): Awaitable<XHPRoot> {
-    if (:xhp::$ENABLE_VALIDATION) {
+    if (:xhp::isChildValidationEnabled()) {
       $this->validateChildren();
     }
 
