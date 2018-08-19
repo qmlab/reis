@@ -7,8 +7,10 @@ function getSellingROI() {
   $roi = round($rc->getROI() * 100, 2);
   $yearly = round($rc->getYearlyROI() * 100, 2);
   echo
-    <strong>ROI(overall) {$roi}</strong>
-    <strong>ROI(yearly) {$yearly}</strong>;
+	  <div>
+	  <p><strong>ROI(overall) {$roi}</strong></p>
+	  <p><strong>ROI(yearly) {$yearly}</strong></p>
+	  </div>;
 }
 
 getSellingROI();

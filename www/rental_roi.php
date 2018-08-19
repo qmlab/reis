@@ -7,8 +7,10 @@ function getRentalROI() {
   $cashflow = round($rc->getCashFlow(), 2);
   $roi = round($rc->getROI() * 100, 2);
   echo
-    <p><strong>Cashflow {$cashflow}</strong></p>
-    <p><strong>ROI {$roi}</strong></p>;
+	  <div>
+	  <p><strong>Cashflow {$cashflow}</strong></p>
+	  <p><strong>ROI {$roi}</strong></p>
+	  </div>;
 }
 
 getRentalROI();
