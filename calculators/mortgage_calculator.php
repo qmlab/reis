@@ -1,6 +1,4 @@
 <?hh // strict
-require_once(__DIR__."/../vendor/hh_autoload.php");
-
 class MortgageCalculator {
   public function __construct(private float $total, private float $downpay_ratio, private float $interest_rate, private float $insurance, private float $property_tax_rate, private float $pmi_rate, private int $months, private int $months_pmi) {
   }
