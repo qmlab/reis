@@ -2,7 +2,7 @@
 require_once(__DIR__."/../vendor/hh_autoload.php");
 require_once(__DIR__."/../adapters/db.php");
 
-function main() {
+function search() {
   $config = parse_ini_file(__DIR__."/../config/server.ini");
   $db = new MongoClient($config["mongodb"], new GuzzleHttp\Client());
   $handle = $db->findAllByKeywords("Marketing Remarks", ["rental", "investment", "estate", "fixer", "sold as-is", "investing", "renting", "distressed", "tlc", "renovation"]);
@@ -32,4 +32,4 @@ function main() {
     </html>;
 }
 
-main();
+search();
