@@ -1,5 +1,5 @@
 <?hh // partial
-require_once(__DIR__."/../vendor/autoload.php");
+require_once(__DIR__."/../vendor/hh_autoload.php");
 
 class MongoClient {
     public function __construct(private $db, private $client): void {
