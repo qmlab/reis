@@ -64,9 +64,17 @@
                   form.classList.add('was-validated');
                 }, false);
               });
+
               fbq('track', 'ViewContent');
+              var total=document.getElementById( "total" ).value;
+              $( '#estimated_rental' ).val(total * 0.005);
             }, false);
           })();
+
+          function getEstimation() {
+            var total=document.getElementById( "total" ).value;
+            return total * 0.005;
+          }
 
           function compute() {
             var total=document.getElementById( "total" ).value;
@@ -150,7 +158,7 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>ROI</span>
+              <span>Investment Result</span>
               <div id="roi"></div>
             </li>
           </ul>
@@ -216,14 +224,14 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_rental">Estimated Rental (USD)</label>
-                <input type="text" class="form-control" id="estimated_rental" placeholder="" value="2000" required>
+                <input type="text" class="form-control" id="estimated_rental" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Estimated rental amount is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost</label>
-                <input type="text" class="form-control" id="fixing_cost" placeholder="" value="30000" required>
+                <input type="text" class="form-control" id="fixing_cost" placeholder="" value="5000" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate</label>

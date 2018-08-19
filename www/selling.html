@@ -64,7 +64,10 @@
                   form.classList.add('was-validated');
                 }, false);
               });
+
               fbq('track', 'ViewContent');
+              var total=document.getElementById( "total" ).value;
+              $( '#estimated_price' ).val(total * 1.2);
             }, false);
           })();
 
@@ -150,7 +153,7 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>ROI</span>
+              <span>Investment Result</span>
               <div id="roi"></div>
             </li>
           </ul>
