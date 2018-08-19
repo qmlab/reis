@@ -14,6 +14,90 @@
 
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="assets/js/vendor/popper.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script src="assets/js/vendor/holder.min.js"></script>
+        <!-- Facebook Pixel Code -->
+        <script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1358654210901589');
+          fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+          src="https://www.facebook.com/tr?id=1358654210901589&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+        <!-- <script src="dist/js/jquery.min.js"></script> -->
+        <script>
+          // Example starter JavaScript for disabling form submissions if there are invalid fields
+          (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+              fbq('track', 'ViewContent');
+            }, false);
+          })();
+
+          function computePayment() {
+            var total=document.getElementById( "total" ).value;
+            var downpay_ratio=document.getElementById( "downpay_ratio" ).value;
+            var interest_rate=document.getElementById( "interest_rate" ).value;
+            var insurance=document.getElementById( "insurance" ).value;
+            var property_tax_rate=document.getElementById( "property_tax_rate" ).value;
+            var pmi_rate=document.getElementById( "pmi_rate" ).value;
+            var months=document.getElementById( "months" ).value;
+            var months_pmi=document.getElementById( "months_pmi" ).value;
+            if (total) {
+              $.ajax({
+                type: 'post',
+                url: 'mortgage_payment.php',
+                data: {
+                  total:total,
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                },
+                success: function (response) {
+                 $( '#monthly_payment' ).html(response);
+                }
+              });
+            }
+          }
+        </script>
   </head>
 
   <body class="bg-light">
@@ -109,89 +193,5 @@
         </ul>
       </footer>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/holder.min.js"></script>
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1358654210901589');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1358654210901589&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-
-    <!-- <script src="dist/js/jquery.min.js"></script> -->
-    <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function() {
-        'use strict';
-
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-          fbq('track', 'ViewContent');
-        }, false);
-      })();
-
-      function computePayment() {
-        var total=document.getElementById( "total" ).value;
-        var downpay_ratio=document.getElementById( "downpay_ratio" ).value;
-        var interest_rate=document.getElementById( "interest_rate" ).value;
-        var insurance=document.getElementById( "insurance" ).value;
-        var property_tax_rate=document.getElementById( "property_tax_rate" ).value;
-        var pmi_rate=document.getElementById( "pmi_rate" ).value;
-        var months=document.getElementById( "months" ).value;
-        var months_pmi=document.getElementById( "months_pmi" ).value;
-        if (total) {
-          $.ajax({
-            type: 'post',
-            url: 'mortgage_payment.php',
-            data: {
-              total:total,
-              downpay_ratio:downpay_ratio,
-              interest_rate:interest_rate,
-              insurance:insurance,
-              property_tax_rate:property_tax_rate,
-              pmi_rate:pmi_rate,
-              months:months,
-              months_pmi:months_pmi,
-            },
-            success: function (response) {
-             $( '#monthly_payment' ).html(response);
-            }
-          });
-        }
-      }
-    </script>
   </body>
 </html>
