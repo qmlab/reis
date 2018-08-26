@@ -65,6 +65,7 @@
                 }, false);
               });
 
+              fill_by_params();
               grayout_fields();
 	            update_fields();
               compute();
@@ -78,8 +79,32 @@
               }
           });
 
+          function get_url_param(key){
+          	var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+          	return result && unescape(result[1]) || "";
+          }
+
+          function fill_by_params() {
+            var total = get_url_param( 'price' );
+            if (total) {
+              $( '#total' ).val(total);
+            }
+            var downpay = get_url_param( 'down' );
+            if (downpay) {
+              $( '#downpay_ratio' ).val(downpay);
+            }
+            var interest_rate = get_url_param( 'interest' );
+            if (interest_rate) {
+              $( '#interest_rate' ).val(interest_rate);
+            }
+            var months = get_url_param( 'months' );
+            if (months) {
+              $( '#months' ).val(months);
+            }
+          }
+
       	  function update_fields() {
-            if ($( '#est_linked' ).is(":checked")) {
+            if ($( '#est_linked' ).is(':checked')) {
       	      var total = $( '#total' ).val();
               $( '#estimated_price' ).val(total * 1.2);
               $( '#estimated_rental' ).val(total * 0.005);
@@ -89,7 +114,7 @@
 	        }
 
           function grayout_fields() {
-            if ($( '#est_linked' ).is(":checked")) {
+            if ($( '#est_linked' ).is(':checked')) {
               $( '#estimated_price' ).prop('disabled', true);
               $( '#estimated_rental' ).prop('disabled', true);
               $( '#sale_fixing_cost' ).prop('disabled', true);
