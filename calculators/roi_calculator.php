@@ -7,6 +7,11 @@ class RentalROICalculator {
     $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi, $hoa);
   }
 
+  public function getExpense(): float {
+    $payment = $this->mc->getPayment();
+    return $this->fixing_cost + ($this->maintenance_rate / 100 + $this->property_management_rate / 100 + $payment) * $this->holding_months;
+  }
+
   // Monthly cash flow
   public function getCashFlow(): float {
     $payment = $this->mc->getPayment();
@@ -16,7 +21,7 @@ class RentalROICalculator {
 
   public function getROI(): float {
     $cash = $this->getCashFlow();
-    $roi = $cash * 12 / ($this->total * $this->downpay_ratio / 100);
+    $roi = $cash * 12 / ($this->total * $this->downpay_ratio / 100 + $this->getExpense());
     return $roi;
   }
 }
@@ -47,4 +52,3 @@ class SellingROICalculator {
     return $yearly;
   }
 }
-

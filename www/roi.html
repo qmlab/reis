@@ -280,6 +280,31 @@
 
               $.ajax({
                 type: 'post',
+                url: 'rental_expense.php',
+                data: {
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:rental_fixing_cost,
+                  estimated_rental:estimated_rental,
+                  property_management_rate:property_management_rate,
+                  maintenance_rate:maintenance_rate,
+                  holding_months:rental_holding_months,
+                  months_rental:months_rental,
+                  hoa,
+                },
+                success: function (response) {
+                 $( '#rental_expense' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
                 url: 'rental_cashflow.php',
                 data: {
                   total:parseFloat(total) + parseFloat(closing_cost_buy),
@@ -336,9 +361,8 @@
 
     <div class="container">
       <div class="py-5 text-center">
-        <!-- <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
         <h2>Real Estate Investment ROI Calculator</h2>
-        <p class="lead">This is a calculator to estimate your ROI if the property is sold or rented</p>
+        <p class="lead">This is a calculator to estimate your ROI if the property is for resale or rental</p>
       </div>
 
       <div class="row">
@@ -352,27 +376,31 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Expense (sold)</span>
+              <span>Expense (resale)</span>
               <div id="sale_expense"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Profit (sold)</span>
+              <span>Profit (resale)</span>
               <div id="sale_earning"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>ROI (sold)</span>
+              <span>ROI (resale)</span>
               <div id="sale_roi"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>ROI/yr (sold)</span>
+              <span>ROI/yr (resale)</span>
               <div id="sale_roi_yr"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Cashflow (rented)</span>
+              <span>Expense (rental)</span>
+              <div id="rental_expense"></div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Cashflow (rental)</span>
               <div id="rental_cashflow"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>ROI/yr (rented)</span>
+              <span>ROI/yr (rental)</span>
               <div id="rental_roi"></div>
             </li>
           </ul>
