@@ -3,8 +3,8 @@ require_once(__DIR__."/mortgage_calculator.php");
 
 class RentalROICalculator {
   private MortgageCalculator $mc;
-  public function __construct(private float $total, private float $downpay_ratio, private float $interest_rate, private float $insurance, private float $property_tax_rate, private float $pmi_rate, private int $months, private int $months_pmi, private float $fixing_cost, private float $estimated_rental, private float $property_management_rate, private float $maintenance_rate, private int $holding_months, private int $months_rental) {
-    $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi);
+  public function __construct(private float $total, private float $downpay_ratio, private float $interest_rate, private float $insurance, private float $property_tax_rate, private float $pmi_rate, private int $months, private int $months_pmi, private float $fixing_cost, private float $estimated_rental, private float $property_management_rate, private float $maintenance_rate, private int $holding_months, private int $months_rental, private float hoa) {
+    $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi, $hoa);
   }
 
   // Monthly cash flow
@@ -23,8 +23,8 @@ class RentalROICalculator {
 
 class SellingROICalculator {
   private MortgageCalculator $mc;
-  public function __construct(private float $total, private float $downpay_ratio, private float $interest_rate, private float $insurance, private float $property_tax_rate, private float $pmi_rate, private int $months, private int $months_pmi, private float $fixing_cost, private float $estimated_price, private float $commission_rate, private float $excise_tax_rate, private float $closing_cost, private int $holding_months) {
-    $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi);
+  public function __construct(private float $total, private float $downpay_ratio, private float $interest_rate, private float $insurance, private float $property_tax_rate, private float $pmi_rate, private int $months, private int $months_pmi, private float $fixing_cost, private float $estimated_price, private float $commission_rate, private float $excise_tax_rate, private float $closing_cost, private int $holding_months, private float hoa) {
+    $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi, $hoa);
   }
 
   public function getROI(): float {
