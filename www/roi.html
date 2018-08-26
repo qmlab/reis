@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Real Estate Selling ROI Calculator</title>
+    <title>Real Estate Sale/Rental ROI Calculator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -68,6 +68,7 @@
               fbq('track', 'ViewContent');
               var total=document.getElementById( "total" ).value;
               $( '#estimated_price' ).val(total * 1.2);
+              $( '#estimated_rental' ).val(total * 0.004);
             }, false);
           })();
 
@@ -80,11 +81,14 @@
             var pmi_rate=document.getElementById( "pmi_rate" ).value;
             var months=document.getElementById( "months" ).value;
             var months_pmi=document.getElementById( "months_pmi" ).value;
-            var fixing_cost=document.getElementById( "fixing_cost" ).value;
+            var sale_fixing_cost=document.getElementById( "sale_fixing_cost" ).value;
+            var rental_fixing_cost=document.getElementById( "rental_fixing_cost" ).value;
             var estimated_price=document.getElementById( "estimated_price" ).value;
+            var estimated_rental=document.getElementById( "estimated_rental" ).value;
             var commission_rate=document.getElementById( "commission_rate" ).value;
             var excise_tax_rate=document.getElementById( "excise_tax_rate" ).value;
-            var holding_months=document.getElementById( "holding_months" ).value;
+            var sale_holding_months=document.getElementById( "sale_holding_months" ).value;
+            var rental_holding_months=document.getElementById( "rental_holding_months" ).value;
             var closing_cost=document.getElementById( "closing_cost" ).value;
             if (total) {
               $.ajax({
@@ -107,7 +111,7 @@
 
               $.ajax({
                 type: 'post',
-                url: 'selling_roi.php',
+                url: 'sale_roi.php',
                 data: {
                   total:total,
                   downpay_ratio:downpay_ratio,
@@ -117,15 +121,39 @@
                   pmi_rate:pmi_rate,
                   months:months,
                   months_pmi:months_pmi,
-                  fixing_cost:fixing_cost,
+                  fixing_cost:sale_fixing_cost,
                   estimated_price:estimated_price,
                   commission_rate:commission_rate,
                   excise_tax_rate:excise_tax_rate,
-                  holding_months:holding_months,
+                  holding_months:sale_holding_months,
                   closing_cost:closing_cost,
                 },
                 success: function (response) {
-                 $( '#roi' ).html(response);
+                 $( '#sale_roi' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
+                url: 'rental_roi.php',
+                data: {
+                  total:total,
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:rental_fixing_cost,
+                  estimated_rental:estimated_rental,
+                  property_management_rate:property_management_rate,
+                  maintenance_rate:maintenance_rate,
+                  holding_months:rental_holding_months,
+                  months_rental:months_rental,
+                },
+                success: function (response) {
+                 $( '#rental_roi' ).html(response);
                 }
               });
             }
@@ -153,8 +181,12 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Investment Result</span>
-              <div id="roi"></div>
+              <span>Investment Result (Selling)</span>
+              <div id="sale_roi"></div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Investment Result (Rental)</span>
+              <div id="rental_roi"></div>
             </li>
           </ul>
         </div>
@@ -218,15 +250,26 @@
             <h4 class="mb-3">Estimations</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="estimated_price">Estimated Selling Price (USD)</label>
+                <label for="estimated_price">Estimated Sale Price (USD)</label>
                 <input type="text" class="form-control" id="estimated_price" placeholder="" value="" required>
                 <div class="invalid-feedback">
-                  Estimated selling price is required
+                  Estimated sale price is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost</label>
-                <input type="text" class="form-control" id="fixing_cost" placeholder="" value="50000" required>
+                <label for="estimated_rental">Estimated Rent (USD)</label>
+                <input type="text" class="form-control" id="estimated_price" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Estimated rent is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="fixing_cost">Fixing-up Cost (For Sale)</label>
+                <input type="text" class="form-control" id="sale_fixing_cost" placeholder="" value="50000" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="fixing_cost">Fixing-up Cost (For Rental)</label>
+                <input type="text" class="form-control" id="rental_fixing_cost" placeholder="" value="50000" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
@@ -237,11 +280,15 @@
                 <input type="text" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="holding_months">Holding Months</label>
-                <input type="text" class="form-control" id="holding_months" placeholder="" value="6" required>
+                <label for="holding_months">Holding Months (For Sale)</label>
+                <input type="text" class="form-control" id="sale_holding_months" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost">Closing Cost</label>
+                <label for="holding_months">Holding Months (For Rental)</label>
+                <input type="text" class="form-control" id="rental_holding_months" placeholder="" value="6" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="closing_cost">Closing Cost (Sale)</label>
                 <input type="text" class="form-control" id="closing_cost" placeholder="" value="15000" required>
               </div>
             </div>
