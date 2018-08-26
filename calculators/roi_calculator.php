@@ -31,12 +31,14 @@ class SellingROICalculator {
     return $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $payment * $this->holding_months + $this->fixing_cost + $this->closing_cost;
   }
 
-  public function getROI(): float {
+  public function getEarning(): float {
     $payment = $this->mc->getPayment();
     $expense = $this->getExpense();
-    $earning = $this->estimated_price - $expense - $this->total;
-    $roi = $earning / ($this->total * $this->downpay_ratio / 100 + $expense);
-    return $roi;
+    return $this->estimated_price - $expense - $this->total;
+  }
+
+  public function getROI(): float {
+    return $this->getEarning() / ($this->total * $this->downpay_ratio / 100 + $this->getExpense());
   }
 
   public function getYearlyROI(): float {

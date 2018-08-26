@@ -204,6 +204,31 @@
 
               $.ajax({
                 type: 'post',
+                url: 'sale_earning.php',
+                data: {
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:sale_fixing_cost,
+                  estimated_price:estimated_price,
+                  commission_rate:commission_rate,
+                  excise_tax_rate:excise_tax_rate,
+                  holding_months:sale_holding_months,
+                  closing_cost:closing_cost_sale,
+                  hoa,
+                },
+                success: function (response) {
+                 $( '#sale_earning' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
                 url: 'sale_roi.php',
                 data: {
                   total:parseFloat(total) + parseFloat(closing_cost_buy),
@@ -328,6 +353,10 @@
             <li class="list-group-item d-flex justify-content-between">
               <span>Expense (sold)</span>
               <div id="sale_expense"></div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Return (sold)</span>
+              <div id="sale_earning"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>ROI (sold)</span>
