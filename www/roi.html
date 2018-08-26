@@ -67,7 +67,8 @@
               });
 
               fill_by_params();
-              grayout_fields();
+              grayout_closing_fields();
+              grayout_est_fields();
 	            update_fields();
               compute();
               fbq('track', 'ViewContent');
@@ -109,29 +110,38 @@
           }
 
       	  function update_fields() {
+            var total = $( '#total' ).val();
+            if ($( '#closing_linked' ).is(':checked')) {
+              $( '#closing_cost_buy' ).val(total * 0.01 * 1000);
+            }
             if ($( '#est_linked' ).is(':checked')) {
       	      var total = $( '#total' ).val();
               $( '#estimated_price' ).val(total * 1.2);
               $( '#estimated_rental' ).val(total * 0.005 * 1000);
               $( '#sale_fixing_cost' ).val(total * 0.05 * 1000);
               $( '#rental_fixing_cost' ).val(total * 0.005 * 1000);
-              $( '#closing_cost_buy' ).val(total * 0.01 * 1000);
             }
 	        }
 
-          function grayout_fields() {
+          function grayout_closing_fields() {
+            if ($( '#closing_linked' ).is(':checked')) {
+              $( '#closing_cost_buy' ).prop('disabled', true);
+            } else {
+              $( '#closing_cost_buy' ).prop('disabled', false);
+            }
+          }
+
+          function grayout_est_fields() {
             if ($( '#est_linked' ).is(':checked')) {
               $( '#estimated_price' ).prop('disabled', true);
               $( '#estimated_rental' ).prop('disabled', true);
               $( '#sale_fixing_cost' ).prop('disabled', true);
               $( '#rental_fixing_cost' ).prop('disabled', true);
-              $( '#closing_cost_buy' ).prop('disabled', true);
             } else {
               $( '#estimated_price' ).prop('disabled', false);
               $( '#estimated_rental' ).prop('disabled', false);
               $( '#sale_fixing_cost' ).prop('disabled', false);
               $( '#rental_fixing_cost' ).prop('disabled', false);
-              $( '#closing_cost_buy' ).prop('disabled', false);
             }
           }
 
@@ -409,7 +419,7 @@
           <form class="needs-validation" novalidate>
             <h4 class="mb-3">Required Facts</h4>
             <div class="checkbox">
-              <label><input id="est_linked" type="checkbox" value="" checked="true" onchange="grayout_fields()">link estimations to purchase price</label>
+              <label><input id="closing_linked" type="checkbox" value="" checked="true" onchange="grayout_closing_fields()">link closing cost to purchase price</label>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -480,6 +490,9 @@
             </div>
 
             <h4 class="mb-3">Estimations</h4>
+            <div class="checkbox">
+              <label><input id="est_linked" type="checkbox" value="" checked="true" onchange="grayout_est_fields()">link estimations to purchase price</label>
+            </div>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_price">Estimated Resale Price (k)</label>
