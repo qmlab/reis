@@ -65,12 +65,8 @@
                 }, false);
               });
 
+	      update_fields();
               fbq('track', 'ViewContent');
-              var total=document.getElementById( "total" ).value;
-              $( '#estimated_price' ).val(total * 1.2);
-              $( '#estimated_rental' ).val(total * 0.004);
-              $( '#sale_fixing_cost' ).val(total * 0.05);
-              $( '#rental_fixing_cost' ).val(total * 0.005);
             }, false);
           })();
 
@@ -79,6 +75,14 @@
                   compute();
               }
           });
+
+	  function update_fields() {
+	      var total = $( '#total' ).val();
+              $( '#estimated_price' ).val(total * 1.2);
+              $( '#estimated_rental' ).val(total * 0.005);
+              $( '#sale_fixing_cost' ).val(total * 0.05);
+              $( '#rental_fixing_cost' ).val(total * 0.005);
+	  }
 
           function compute() {
             var total=document.getElementById( "total" ).value;
@@ -192,11 +196,11 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Sale Return</span>
+              <span>Sale</span>
               <div id="sale_roi"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Rental Return</span>
+              <span>Rental</span>
               <div id="rental_roi"></div>
             </li>
           </ul>
@@ -207,7 +211,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price</label>
-                <input type="text" class="form-control" id="total" placeholder="" value="1000000" required>
+                <input type="text" class="form-control" id="total" placeholder="" value="1000000" onchange="update_fields()" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
@@ -275,11 +279,11 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (For Sale)</label>
+                <label for="fixing_cost">Fixing-up Cost (Sale)</label>
                 <input type="text" class="form-control" id="sale_fixing_cost" placeholder="" value="" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (For Rental)</label>
+                <label for="fixing_cost">Fixing-up Cost (Rental)</label>
                 <input type="text" class="form-control" id="rental_fixing_cost" placeholder="" value="" required>
               </div>
               <div class="col-md-6 mb-3">
@@ -291,11 +295,11 @@
                 <input type="text" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="holding_months">Holding Months (For Sale)</label>
+                <label for="holding_months">Holding Months (Sale)</label>
                 <input type="text" class="form-control" id="sale_holding_months" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="holding_months">Holding Months (For Rental)</label>
+                <label for="holding_months">Holding Months (Rental)</label>
                 <input type="text" class="form-control" id="rental_holding_months" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
