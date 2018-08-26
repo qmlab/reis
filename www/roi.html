@@ -110,6 +110,7 @@
               $( '#estimated_rental' ).val(total * 0.005);
               $( '#sale_fixing_cost' ).val(total * 0.05);
               $( '#rental_fixing_cost' ).val(total * 0.005);
+              $( '#closing_cost_buy' ).val(total * 0.01);
             }
 	        }
 
@@ -119,11 +120,13 @@
               $( '#estimated_rental' ).prop('disabled', true);
               $( '#sale_fixing_cost' ).prop('disabled', true);
               $( '#rental_fixing_cost' ).prop('disabled', true);
+              $( '#closing_cost_buy' ).prop('disabled', true);
             } else {
               $( '#estimated_price' ).prop('disabled', false);
               $( '#estimated_rental' ).prop('disabled', false);
               $( '#sale_fixing_cost' ).prop('disabled', false);
               $( '#rental_fixing_cost' ).prop('disabled', false);
+              $( '#closing_cost_buy' ).prop('disabled', true);
             }
           }
 
@@ -314,37 +317,44 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price (k)</label>
-                <input type="number" class="form-control" id="total" placeholder="" value="1000" onchange="update_fields()" required>
+                <input type="number" class="form-control" id="total" placeholder="" value="1000" onchange="update_fields(); compute()" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="downpay_ratio">Down Payment %</label>
-                <input type="number" class="form-control" id="downpay_ratio" placeholder="" value="20" required>
+                <input type="number" class="form-control" id="downpay_ratio" placeholder="" value="20" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Downpay percentage is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="interest_rate">Interest Rate %</label>
-                <input type="number" class="form-control" id="interest_rate" placeholder="" value="4.5" required>
+                <input type="number" class="form-control" id="interest_rate" placeholder="" value="4.5" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Interest rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_tax_rate">Property Tax Rate % (per year)</label>
-                <input type="number" class="form-control" id="property_tax_rate" placeholder="" value="1" required>
+                <input type="number" class="form-control" id="property_tax_rate" placeholder="" value="1" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Property tax rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months">Total Number of Monthly Payments</label>
-                <input type="number" class="form-control" id="months" placeholder="" value="360" required>
+                <input type="number" class="form-control" id="months" placeholder="" value="360" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Total number of months is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="closing_cost_sale">Closing Cost (Buy)(k)</label>
+                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="15" onchange="compute()" required>
+                <div class="invalid-feedback">
+                  Purchasing closing cost is required
                 </div>
               </div>
             </div>
@@ -353,15 +363,15 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="insurance">Home Insurance (k)</label>
-                <input type="number" class="form-control" id="insurance" placeholder="" value="1" required>
+                <input type="number" class="form-control" id="insurance" placeholder="" value="1" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="pmi_rate">PMI Rate %</label>
-                <input type="number" class="form-control" id="pmi_rate" placeholder="" value="0" required>
+                <input type="number" class="form-control" id="pmi_rate" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_pmi">PMI Months</label>
-                <input type="number" class="form-control" id="months_pmi" placeholder="" value="0" required>
+                <input type="number" class="form-control" id="months_pmi" placeholder="" value="0" onchange="compute()" required>
               </div>
             </div>
 
@@ -369,61 +379,57 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_price">Estimated Sale Price (k)</label>
-                <input type="number" class="form-control" id="estimated_price" placeholder="" value="1200" required>
+                <input type="number" class="form-control" id="estimated_price" placeholder="" value="1200" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Estimated sale price is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="estimated_rental">Estimated Rent (k)</label>
-                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5" required>
+                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Estimated rent is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (Sale)(k)</label>
-                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50" required>
+                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (Rental)(k)</label>
-                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5" required>
+                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
-                <input type="number" class="form-control" id="commission_rate" placeholder="" value="6" required>
+                <input type="number" class="form-control" id="commission_rate" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="excise_tax_rate">Excise Tax Rate</label>
-                <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" required>
+                <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Sale)</label>
-                <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="6" required>
+                <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Rental)</label>
-                <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="closing_cost_sale">Closing Cost (Buy)(k)</label>
-                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="15" required>
+                <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="closing_cost_sale">Closing Cost (Sale)(k)</label>
-                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="15" required>
+                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="15" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate (%)</label>
-                <input type="number" class="form-control" id="property_management_rate" placeholder="" value="10" required>
+                <input type="number" class="form-control" id="property_management_rate" placeholder="" value="10" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="maintenance_rate">Maintenance Rate (%)</label>
-                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="1" required>
+                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="1" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_rental">Estimated Months of Rental</label>
-                <input type="number" class="form-control" id="months_rental" placeholder="" value="24" required>
+                <input type="number" class="form-control" id="months_rental" placeholder="" value="24" onchange="compute()" required>
               </div>
             </div>
 
