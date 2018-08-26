@@ -8,8 +8,8 @@ function get_sale_roi() {
   $yearly = round($rc->getYearlyROI() * 100, 2);
   echo
 	  <div>
-	  <p><strong>ROI(overall) {$roi}</strong></p>
-	  <p><strong>ROI(yearly) {$yearly}</strong></p>
+	  <p><strong>ROI(overall) {$roi}%</strong></p>
+	  <p><strong>ROI(yearly) {$yearly}%</strong></p>
 	  </div>;
 }
 

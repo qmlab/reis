@@ -69,6 +69,8 @@
               var total=document.getElementById( "total" ).value;
               $( '#estimated_price' ).val(total * 1.2);
               $( '#estimated_rental' ).val(total * 0.004);
+              $( '#sale_fixing_cost' ).val(total * 0.05);
+              $( '#rental_fixing_cost' ).val(total * 0.005);
             }, false);
           })();
 
@@ -175,26 +177,26 @@
     <div class="container">
       <div class="py-5 text-center">
         <!-- <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
-        <h2>Selling ROI Calculator</h2>
-        <p class="lead">This is a calculator to estimate your ROI if the property is sold</p>
+        <h2>Real Estate Investment ROI Calculator</h2>
+        <p class="lead">This is a calculator to estimate your ROI if the property is sold or rented</p>
       </div>
 
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Calculation Result</span>
+            <span class="text-muted">Return of Investment</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between">
-              <span>Monthly Payment (USD)</span>
+              <span>Monthly Payment</span>
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Investment Result (Selling)</span>
+              <span>Sale Return</span>
               <div id="sale_roi"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Investment Result (Rental)</span>
+              <span>Rental Return</span>
               <div id="rental_roi"></div>
             </li>
           </ul>
@@ -274,11 +276,11 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (For Sale)</label>
-                <input type="text" class="form-control" id="sale_fixing_cost" placeholder="" value="50000" required>
+                <input type="text" class="form-control" id="sale_fixing_cost" placeholder="" value="" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (For Rental)</label>
-                <input type="text" class="form-control" id="rental_fixing_cost" placeholder="" value="50000" required>
+                <input type="text" class="form-control" id="rental_fixing_cost" placeholder="" value="" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
