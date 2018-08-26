@@ -168,6 +168,54 @@
 
               $.ajax({
                 type: 'post',
+                url: 'sale_roi_yr.php',
+                data: {
+                  total:total,
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:sale_fixing_cost,
+                  estimated_price:estimated_price,
+                  commission_rate:commission_rate,
+                  excise_tax_rate:excise_tax_rate,
+                  holding_months:sale_holding_months,
+                  closing_cost:closing_cost,
+                },
+                success: function (response) {
+                 $( '#sale_roi_yr' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
+                url: 'rental_cashflow.php',
+                data: {
+                  total:total,
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:rental_fixing_cost,
+                  estimated_rental:estimated_rental,
+                  property_management_rate:property_management_rate,
+                  maintenance_rate:maintenance_rate,
+                  holding_months:rental_holding_months,
+                  months_rental:months_rental,
+                },
+                success: function (response) {
+                 $( '#rental_cashflow' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
                 url: 'rental_roi.php',
                 data: {
                   total:total,
@@ -214,11 +262,19 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Sale</span>
+              <span>Sale ROI</span>
               <div id="sale_roi"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Rental</span>
+              <span>Sale ROI/yr</span>
+              <div id="sale_roi_yr"></div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Rental Cashflow</span>
+              <div id="rental_cashflow"></div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Rental ROI/yr</span>
               <div id="rental_roi"></div>
             </li>
           </ul>
