@@ -7,7 +7,7 @@ function get_sale_expense() {
   $exp = round($rc->getExpense(), 2);
   echo
 	  <div>
-	   <strong>{$exp}%</strong>
+	   <strong>{$exp}</strong>
 	  </div>;
 }
 
