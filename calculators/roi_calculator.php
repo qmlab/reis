@@ -29,8 +29,9 @@ class SellingROICalculator {
 
   public function getROI(): float {
     $payment = $this->mc->getPayment();
-    $earning = $this->estimated_price * (1 - $this->commission_rate / 100 - $this->excise_tax_rate / 100) - $payment * $this->holding_months - $this->fixing_cost - $this->closing_cost - $this->total;
-    $roi = $earning / ($this->total * $this->downpay_ratio / 100);
+    $expense = $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $payment * $this->holding_months + $this->fixing_cost + $this->closing_cost;
+    $earning = $this->estimated_price - $out_of_pocket - $this->total;
+    $roi = $earning / ($this->total * $this->downpay_ratio / 100 + $expense);
     return $roi;
   }
 

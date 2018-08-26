@@ -128,23 +128,24 @@
           }
 
           function compute() {
-            var total=document.getElementById( "total" ).value;
+            var total=document.getElementById( "total" ).value * 1000;
             var downpay_ratio=document.getElementById( "downpay_ratio" ).value;
             var interest_rate=document.getElementById( "interest_rate" ).value;
-            var insurance=document.getElementById( "insurance" ).value;
+            var insurance=document.getElementById( "insurance" ).value * 1000;
             var property_tax_rate=document.getElementById( "property_tax_rate" ).value;
             var pmi_rate=document.getElementById( "pmi_rate" ).value;
             var months=document.getElementById( "months" ).value;
             var months_pmi=document.getElementById( "months_pmi" ).value;
-            var sale_fixing_cost=document.getElementById( "sale_fixing_cost" ).value;
-            var rental_fixing_cost=document.getElementById( "rental_fixing_cost" ).value;
-            var estimated_price=document.getElementById( "estimated_price" ).value;
-            var estimated_rental=document.getElementById( "estimated_rental" ).value;
+            var sale_fixing_cost=document.getElementById( "sale_fixing_cost" ).value * 1000;
+            var rental_fixing_cost=document.getElementById( "rental_fixing_cost" ).value * 1000;
+            var estimated_price=document.getElementById( "estimated_price" ).value * 1000;
+            var estimated_rental=document.getElementById( "estimated_rental" ).value * 1000;
             var commission_rate=document.getElementById( "commission_rate" ).value;
             var excise_tax_rate=document.getElementById( "excise_tax_rate" ).value;
             var sale_holding_months=document.getElementById( "sale_holding_months" ).value;
             var rental_holding_months=document.getElementById( "rental_holding_months" ).value;
-            var closing_cost=document.getElementById( "closing_cost" ).value;
+            var closing_cost_buy=document.getElementById( "closing_cost_buy" ).value * 1000;
+            var closing_cost_sale=document.getElementById( "closing_cost_sale" ).value * 1000;
             var property_management_rate=document.getElementById( "property_management_rate" ).value;
             var maintenance_rate=document.getElementById( "maintenance_rate" ).value;
             var months_rental=document.getElementById( "months_rental" ).value;
@@ -171,7 +172,7 @@
                 type: 'post',
                 url: 'sale_roi.php',
                 data: {
-                  total:total,
+                  total:total + closing_cost_buy,
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -184,7 +185,7 @@
                   commission_rate:commission_rate,
                   excise_tax_rate:excise_tax_rate,
                   holding_months:sale_holding_months,
-                  closing_cost:closing_cost,
+                  closing_cost:closing_cost_sale,
                 },
                 success: function (response) {
                  $( '#sale_roi' ).html(response);
@@ -195,7 +196,7 @@
                 type: 'post',
                 url: 'sale_roi_yr.php',
                 data: {
-                  total:total,
+                  total:total + closing_cost_buy,
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -208,7 +209,7 @@
                   commission_rate:commission_rate,
                   excise_tax_rate:excise_tax_rate,
                   holding_months:sale_holding_months,
-                  closing_cost:closing_cost,
+                  closing_cost:closing_cost_sale,
                 },
                 success: function (response) {
                  $( '#sale_roi_yr' ).html(response);
@@ -219,7 +220,7 @@
                 type: 'post',
                 url: 'rental_cashflow.php',
                 data: {
-                  total:total,
+                  total:total + closing_cost_buy,
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -243,7 +244,7 @@
                 type: 'post',
                 url: 'rental_roi.php',
                 data: {
-                  total:total,
+                  total:total + closing_cost_buy,
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -287,19 +288,19 @@
               <div id="monthly_payment"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Sale ROI</span>
+              <span>ROI (sold)</span>
               <div id="sale_roi"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Sale ROI/yr</span>
+              <span>ROI/yr (sold)</span>
               <div id="sale_roi_yr"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Rental Cashflow</span>
+              <span>Cashflow (rented)</span>
               <div id="rental_cashflow"></div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
-              <span>Rental ROI/yr</span>
+              <span>ROI/yr (rented)</span>
               <div id="rental_roi"></div>
             </li>
           </ul>
@@ -312,36 +313,36 @@
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="total">Purchasing Price</label>
-                <input type="text" class="form-control" id="total" placeholder="" value="1000000" onchange="update_fields()" required>
+                <label for="total">Purchasing Price (k)</label>
+                <input type="number" class="form-control" id="total" placeholder="" value="1000" onchange="update_fields()" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="downpay_ratio">Down Payment %</label>
-                <input type="text" class="form-control" id="downpay_ratio" placeholder="" value="20" required>
+                <input type="number" class="form-control" id="downpay_ratio" placeholder="" value="20" required>
                 <div class="invalid-feedback">
                   Downpay percentage is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="interest_rate">Interest Rate %</label>
-                <input type="text" class="form-control" id="interest_rate" placeholder="" value="4.5" required>
+                <input type="number" class="form-control" id="interest_rate" placeholder="" value="4.5" required>
                 <div class="invalid-feedback">
                   Interest rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_tax_rate">Property Tax Rate % (per year)</label>
-                <input type="text" class="form-control" id="property_tax_rate" placeholder="" value="1" required>
+                <input type="number" class="form-control" id="property_tax_rate" placeholder="" value="1" required>
                 <div class="invalid-feedback">
                   Property tax rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months">Total Number of Monthly Payments</label>
-                <input type="text" class="form-control" id="months" placeholder="" value="360" required>
+                <input type="number" class="form-control" id="months" placeholder="" value="360" required>
                 <div class="invalid-feedback">
                   Total number of months is required
                 </div>
@@ -351,74 +352,78 @@
             <h4 class="mb-3">Optional Facts</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="insurance">Home Insurance</label>
-                <input type="text" class="form-control" id="insurance" placeholder="" value="1000" required>
+                <label for="insurance">Home Insurance (k)</label>
+                <input type="number" class="form-control" id="insurance" placeholder="" value="1" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="pmi_rate">PMI Rate %</label>
-                <input type="text" class="form-control" id="pmi_rate" placeholder="" value="0" required>
+                <input type="number" class="form-control" id="pmi_rate" placeholder="" value="0" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_pmi">PMI Months</label>
-                <input type="text" class="form-control" id="months_pmi" placeholder="" value="0" required>
+                <input type="number" class="form-control" id="months_pmi" placeholder="" value="0" required>
               </div>
             </div>
 
             <h4 class="mb-3">Estimations</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="estimated_price">Estimated Sale Price (USD)</label>
-                <input type="text" class="form-control" id="estimated_price" placeholder="" value="" required>
+                <label for="estimated_price">Estimated Sale Price (k)</label>
+                <input type="number" class="form-control" id="estimated_price" placeholder="" value="1200" required>
                 <div class="invalid-feedback">
                   Estimated sale price is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="estimated_rental">Estimated Rent (USD)</label>
-                <input type="text" class="form-control" id="estimated_rental" placeholder="" value="" required>
+                <label for="estimated_rental">Estimated Rent (k)</label>
+                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5" required>
                 <div class="invalid-feedback">
                   Estimated rent is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (Sale)</label>
-                <input type="text" class="form-control" id="sale_fixing_cost" placeholder="" value="" required>
+                <label for="fixing_cost">Fixing-up Cost (Sale)(k)</label>
+                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (Rental)</label>
-                <input type="text" class="form-control" id="rental_fixing_cost" placeholder="" value="" required>
+                <label for="fixing_cost">Fixing-up Cost (Rental)(k)</label>
+                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
-                <input type="text" class="form-control" id="commission_rate" placeholder="" value="6" required>
+                <input type="number" class="form-control" id="commission_rate" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="excise_tax_rate">Excise Tax Rate</label>
-                <input type="text" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" required>
+                <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Sale)</label>
-                <input type="text" class="form-control" id="sale_holding_months" placeholder="" value="6" required>
+                <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Rental)</label>
-                <input type="text" class="form-control" id="rental_holding_months" placeholder="" value="6" required>
+                <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost">Closing Cost (Sale)</label>
-                <input type="text" class="form-control" id="closing_cost" placeholder="" value="15000" required>
+                <label for="closing_cost_sale">Closing Cost (Buy)(k)</label>
+                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="15" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="closing_cost_sale">Closing Cost (Sale)(k)</label>
+                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="15" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate (%)</label>
-                <input type="text" class="form-control" id="property_management_rate" placeholder="" value="10" required>
+                <input type="number" class="form-control" id="property_management_rate" placeholder="" value="10" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="maintenance_rate">Maintenance Rate (%)</label>
-                <input type="text" class="form-control" id="maintenance_rate" placeholder="" value="1" required>
+                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="1" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_rental">Estimated Months of Rental</label>
-                <input type="text" class="form-control" id="months_rental" placeholder="" value="24" required>
+                <input type="number" class="form-control" id="months_rental" placeholder="" value="24" required>
               </div>
             </div>
 
