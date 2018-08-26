@@ -72,6 +72,12 @@
             }, false);
           })();
 
+          $(document).keypress(function(e) {
+              if(e.which == 13) {
+                  compute();
+              }
+          });
+
           function compute() {
             var total=document.getElementById( "total" ).value;
             var downpay_ratio=document.getElementById( "downpay_ratio" ).value;
@@ -90,6 +96,9 @@
             var sale_holding_months=document.getElementById( "sale_holding_months" ).value;
             var rental_holding_months=document.getElementById( "rental_holding_months" ).value;
             var closing_cost=document.getElementById( "closing_cost" ).value;
+            var property_management_rate=document.getElementById( "property_management_rate" ).value;
+            var maintenance_rate=document.getElementById( "maintenance_rate" ).value;
+            var months_rental=document.getElementById( "months_rental" ).value;
             if (total) {
               $.ajax({
                 type: 'post',
@@ -291,10 +300,22 @@
                 <label for="closing_cost">Closing Cost (Sale)</label>
                 <input type="text" class="form-control" id="closing_cost" placeholder="" value="15000" required>
               </div>
+              <div class="col-md-6 mb-3">
+                <label for="property_management_rate">Property Management Rate (%)</label>
+                <input type="text" class="form-control" id="property_management_rate" placeholder="" value="10" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="maintenance_rate">Maintenance Rate (%)</label>
+                <input type="text" class="form-control" id="maintenance_rate" placeholder="" value="1" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="months_rental">Estimated Months of Rental</label>
+                <input type="text" class="form-control" id="months_rental" placeholder="" value="24" required>
+              </div>
             </div>
 
             <hr class="mb-4">
-	    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">GO</input>
+	    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">Compute</input>
           </form>
         </div>
       </div>
