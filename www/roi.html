@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Real Estate Sale/Rental ROI Calculator</title>
+    <title>Real Estate Resale/Rental ROI Calculator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -179,6 +179,31 @@
 
               $.ajax({
                 type: 'post',
+                url: 'sale_expense.php',
+                data: {
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
+                  downpay_ratio:downpay_ratio,
+                  interest_rate:interest_rate,
+                  insurance:insurance,
+                  property_tax_rate:property_tax_rate,
+                  pmi_rate:pmi_rate,
+                  months:months,
+                  months_pmi:months_pmi,
+                  fixing_cost:sale_fixing_cost,
+                  estimated_price:estimated_price,
+                  commission_rate:commission_rate,
+                  excise_tax_rate:excise_tax_rate,
+                  holding_months:sale_holding_months,
+                  closing_cost:closing_cost_sale,
+                  hoa,
+                },
+                success: function (response) {
+                 $( '#sale_expense' ).html(response);
+                }
+              });
+
+              $.ajax({
+                type: 'post',
                 url: 'sale_roi.php',
                 data: {
                   total:parseFloat(total) + parseFloat(closing_cost_buy),
@@ -300,6 +325,10 @@
               <span>Monthly Payment</span>
               <div id="monthly_payment"></div>
             </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Expense (sold)</span>
+                <div id="sale_expense"></div>
+              </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>ROI (sold)</span>
               <div id="sale_roi"></div>
@@ -395,10 +424,10 @@
             <h4 class="mb-3">Estimations</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="estimated_price">Estimated Sale Price (k)</label>
+                <label for="estimated_price">Estimated Resale Price (k)</label>
                 <input type="number" class="form-control" id="estimated_price" placeholder="" value="1200" onchange="compute()" required>
                 <div class="invalid-feedback">
-                  Estimated sale price is required
+                  Estimated resale price is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
@@ -409,7 +438,7 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (Sale)</label>
+                <label for="fixing_cost">Fixing-up Cost (Resale)</label>
                 <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
@@ -425,7 +454,7 @@
                 <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="holding_months">Holding Months (Sale)</label>
+                <label for="holding_months">Holding Months (Resale)</label>
                 <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
@@ -433,7 +462,7 @@
                 <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost_sale">Closing Cost (Sale)</label>
+                <label for="closing_cost_sale">Closing Cost (Resale)</label>
                 <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="10000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
