@@ -27,9 +27,13 @@ class SellingROICalculator {
     $this->mc = new MortgageCalculator($total, $downpay_ratio, $interest_rate, $insurance, $property_tax_rate, $pmi_rate, $months, $months_pmi, $hoa);
   }
 
+  public function getExpense(): float{
+    return $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $payment * $this->holding_months + $this->fixing_cost + $this->closing_cost;
+  }
+
   public function getROI(): float {
     $payment = $this->mc->getPayment();
-    $expense = $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $payment * $this->holding_months + $this->fixing_cost + $this->closing_cost;
+    $expense = $this->getExpense();
     $earning = $this->estimated_price - $expense - $this->total;
     $roi = $earning / ($this->total * $this->downpay_ratio / 100 + $expense);
     return $roi;
@@ -41,7 +45,3 @@ class SellingROICalculator {
     return $yearly;
   }
 }
-
-//Quick test
-//$cal = new SellingROICalculator(1000000.0, 20.0, 4.5, 1000.0, 1.0, 0.0, 360, 0, 50000.0, 1200000.0, 6.0, 1.28, 15000.0, 6, 200.0);
-//print_r("result=" . $cal->getROI() . "\n");
