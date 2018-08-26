@@ -181,7 +181,7 @@
                 type: 'post',
                 url: 'sale_roi.php',
                 data: {
-                  total:total + closing_cost_buy,
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -206,7 +206,7 @@
                 type: 'post',
                 url: 'sale_roi_yr.php',
                 data: {
-                  total:total + closing_cost_buy,
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -231,7 +231,7 @@
                 type: 'post',
                 url: 'rental_cashflow.php',
                 data: {
-                  total:total + closing_cost_buy,
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
@@ -256,7 +256,7 @@
                 type: 'post',
                 url: 'rental_roi.php',
                 data: {
-                  total:total + closing_cost_buy,
+                  total:parseFloat(total) + parseFloat(closing_cost_buy),
                   downpay_ratio:downpay_ratio,
                   interest_rate:interest_rate,
                   insurance:insurance,
