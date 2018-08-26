@@ -111,10 +111,10 @@
             if ($( '#est_linked' ).is(':checked')) {
       	      var total = $( '#total' ).val();
               $( '#estimated_price' ).val(total * 1.2);
-              $( '#estimated_rental' ).val(total * 0.005);
-              $( '#sale_fixing_cost' ).val(total * 0.05);
-              $( '#rental_fixing_cost' ).val(total * 0.005);
-              $( '#closing_cost_buy' ).val(total * 0.01);
+              $( '#estimated_rental' ).val(total * 0.005 * 1000);
+              $( '#sale_fixing_cost' ).val(total * 0.05 * 1000);
+              $( '#rental_fixing_cost' ).val(total * 0.005 * 1000);
+              $( '#closing_cost_buy' ).val(total * 0.01 * 1000);
             }
 	        }
 
@@ -138,22 +138,22 @@
             var total=document.getElementById( "total" ).value * 1000;
             var downpay_ratio=document.getElementById( "downpay_ratio" ).value;
             var interest_rate=document.getElementById( "interest_rate" ).value;
-            var hoa=document.getElementById( "hoa" ).value * 1000;
-            var insurance=document.getElementById( "insurance" ).value * 1000;
+            var hoa=document.getElementById( "hoa" ).value;
+            var insurance=document.getElementById( "insurance" ).value;
             var property_tax_rate=document.getElementById( "property_tax_rate" ).value;
             var pmi_rate=document.getElementById( "pmi_rate" ).value;
             var months=document.getElementById( "months" ).value;
             var months_pmi=document.getElementById( "months_pmi" ).value;
-            var sale_fixing_cost=document.getElementById( "sale_fixing_cost" ).value * 1000;
-            var rental_fixing_cost=document.getElementById( "rental_fixing_cost" ).value * 1000;
+            var sale_fixing_cost=document.getElementById( "sale_fixing_cost" ).value;
+            var rental_fixing_cost=document.getElementById( "rental_fixing_cost" ).value;
             var estimated_price=document.getElementById( "estimated_price" ).value * 1000;
-            var estimated_rental=document.getElementById( "estimated_rental" ).value * 1000;
+            var estimated_rental=document.getElementById( "estimated_rental" ).value;
             var commission_rate=document.getElementById( "commission_rate" ).value;
             var excise_tax_rate=document.getElementById( "excise_tax_rate" ).value;
             var sale_holding_months=document.getElementById( "sale_holding_months" ).value;
             var rental_holding_months=document.getElementById( "rental_holding_months" ).value;
-            var closing_cost_buy=document.getElementById( "closing_cost_buy" ).value * 1000;
-            var closing_cost_sale=document.getElementById( "closing_cost_sale" ).value * 1000;
+            var closing_cost_buy=document.getElementById( "closing_cost_buy" ).value;
+            var closing_cost_sale=document.getElementById( "closing_cost_sale" ).value;
             var property_management_rate=document.getElementById( "property_management_rate" ).value;
             var maintenance_rate=document.getElementById( "maintenance_rate" ).value;
             var months_rental=document.getElementById( "months_rental" ).value;
@@ -361,15 +361,15 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="hoa">Monthly HOA(k)</label>
-                <input type="number" class="form-control" id="hoa" placeholder="" value="0.2" onchange="compute()" required>
+                <label for="hoa">Monthly HOA</label>
+                <input type="number" class="form-control" id="hoa" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Monthly HOA fee is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost_sale">Closing Cost (Buy)(k)</label>
-                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="15" onchange="compute()" required>
+                <label for="closing_cost_sale">Closing Cost (Buy)</label>
+                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="10000" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Purchasing closing cost is required
                 </div>
@@ -379,8 +379,8 @@
             <h4 class="mb-3">Optional Facts</h4>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="insurance">Home Insurance (k)</label>
-                <input type="number" class="form-control" id="insurance" placeholder="" value="1" onchange="compute()" required>
+                <label for="insurance">Home Insurance</label>
+                <input type="number" class="form-control" id="insurance" placeholder="" value="1000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="pmi_rate">PMI Rate %</label>
@@ -402,19 +402,19 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="estimated_rental">Estimated Rent (k)</label>
-                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5" onchange="compute()" required>
+                <label for="estimated_rental">Estimated Rent</label>
+                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5000" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Estimated rent is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (Sale)(k)</label>
-                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50" onchange="compute()" required>
+                <label for="fixing_cost">Fixing-up Cost (Sale)</label>
+                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="fixing_cost">Fixing-up Cost (Rental)(k)</label>
-                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5" onchange="compute()" required>
+                <label for="fixing_cost">Fixing-up Cost (Rental)</label>
+                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
@@ -433,8 +433,8 @@
                 <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost_sale">Closing Cost (Sale)(k)</label>
-                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="15" onchange="compute()" required>
+                <label for="closing_cost_sale">Closing Cost (Sale)</label>
+                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="10000" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate (%)</label>
