@@ -1,4 +1,21 @@
-.affix {
-    top:auto;
-    position:fixed;
+@media (min-width: 768px) {
+  .affix {
+      top: auto;
+      position: fixed;
+  }
+  .auto-hide {
+      visibility: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .affix {
+  }
+  .auto-hide {
+      visibility: visible;
+  }
+}
+
+ul {
+  list-style: none;
 }

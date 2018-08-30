@@ -416,6 +416,9 @@
               <span>ROI/yr (rental)</span>
               <div id="rental_roi"></div>
             </li>
+            <li class="auto-hide">
+              <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">Compute</input>
+            </li>
           </ul>
         </div>
         <div class="col-md-8 order-md-1">
@@ -552,14 +555,12 @@
                 <input type="number" class="form-control" id="months_rental" placeholder="" value="24" onchange="compute()" required>
               </div>
             </div>
-
-            <hr class="mb-4">
-	    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">Compute</input>
           </form>
         </div>
       </div>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
+        <hr />
         <p class="mb-1">MaggieSun Real Estate</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Privacy</a></li>
