@@ -7,7 +7,7 @@ function get_sale_roi() {
   $roi = round($rc->getROI() * 100, 2);
   echo
 	  <div>
-	   <strong>{$roi}%</strong>
+	   <strong id="sale_roi_value">{$roi}%</strong>
 	  </div>;
 }
 

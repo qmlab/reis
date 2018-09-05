@@ -287,6 +287,12 @@
                 },
                 success: function (response) {
                  $( '#sale_roi' ).html(response);
+                 sale_roi_value = parseFloat($('#sale_roi_value').val())/100.0;
+                 if (sale_roi_value >= 0.05) {
+                   $('#sale_roi_txt').show();
+                 } else {
+                   $('#sale_roi_txt').hide();
+                 }
                 }
               });
 
@@ -387,6 +393,12 @@
                 },
                 success: function (response) {
                  $( '#rental_roi' ).html(response);
+                 rental_roi_value = parseFloat($('#rental_roi_value').val())/100.0;
+                 if (rental_roi_value >= 0.05) {
+                   $('#rental_roi_txt').show();
+                 } else {
+                   $('#rental_roi_txt').hide();
+                 }
                 }
               });
 
@@ -428,6 +440,7 @@
             <li class="list-group-item d-flex justify-content-between">
               <span>ROI (resale)</span>
               <div id="sale_roi"></div>
+              <div id="sale_roi_txt" hidden="true">Good ROI. Email Maggie Sun right now: maggiesunjingyu@gmail.com</div>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>ROI/yr (resale)</span>
@@ -444,6 +457,7 @@
             <li class="list-group-item d-flex justify-content-between">
               <span>ROI/yr (rental)</span>
               <div id="rental_roi"></div>
+              <div id="rental_roi_txt" hidden="true">Good ROI. Email Maggie Sun right now: maggiesunjingyu@gmail.com</div>
             </li>
             <li>
               <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">Compute</input>
