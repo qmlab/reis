@@ -67,9 +67,10 @@
                 }, false);
               });
 
+              reset();
               fill_by_params();
-              grayout_closing_fields();
-              grayout_est_fields();
+              // grayout_closing_fields();
+              // grayout_est_fields();
 	            update_fields();
               compute();
               fbq('track', 'ViewContent');
@@ -81,6 +82,32 @@
                   compute();
               }
           });
+
+          function reset() {
+            $('#total').val(0);
+            $('#downpay_ratio').val(20);
+            $('#interest_rate').val(4.5);
+            $('#hoa').val(0);
+            $('#insurance').val(1000);
+            $('#hoa').val(0);
+            $('#property_tax_rate').val(1);
+            $('#pmi_rate').val(0);
+            $('#months').val(360);
+            $('#months_pmi').val(0);
+            $('#sale_fixing_cost').val(0);
+            $('#rental_fixing_cost').val(0);
+            $('#estimated_price').val(0);
+            $('#estimated_rental').val(0);
+            $('#commission_rate').val(6);
+            $('#excise_tax_rate').val(1.28);
+            $('#sale_holding_months').val(6);
+            $('#rental_holding_months').val(3);
+            $('#closing_cost_buy').val(0);
+            $('#closing_cost_sale').val(0);
+            $('#property_management_rate').val(10);
+            $('#maintenance_rate').val(0.5);
+            $('#months_rental').val(24);
+          }
 
           function get_url_param(key){
           	var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
@@ -371,7 +398,7 @@
 
     <div class="container">
       <div style="position: absolute; top: 0; left: 0; text-align= left">
-        <a href="http://suninvestors.io">Back To Home</a>
+        <a href="http://suninvestors.io"><font size="4">Back To Home</font></a>
       </div>
       <div class="py-5 text-center">
         <h2>Real Estate Investment ROI Calculator</h2>
@@ -426,8 +453,8 @@
         <div class="col-md-8 order-md-1">
           <form class="needs-validation" novalidate>
             <h4 class="mb-3">Required Facts</h4>
-            <div class="checkbox">
-              <label><input id="closing_linked" type="checkbox" value="" checked="true" onchange="grayout_closing_fields()">link closing cost to purchase price</label>
+            <div class="checkbox" hidden="true">
+              <label hidden="true"><input id="closing_linked" type="checkbox" value="" checked="false" onchange="grayout_closing_fields()">link closing cost to purchase price</label>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -439,28 +466,28 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="downpay_ratio">Down Payment %</label>
-                <input type="number" class="form-control" id="downpay_ratio" placeholder="" value="20" onchange="compute()" required>
+                <input type="number" class="form-control" id="downpay_ratio" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Downpay percentage is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="interest_rate">Interest Rate %</label>
-                <input type="number" class="form-control" id="interest_rate" placeholder="" value="4.5" onchange="compute()" required>
+                <input type="number" class="form-control" id="interest_rate" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Interest rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_tax_rate">Property Tax Rate % (per year)</label>
-                <input type="number" class="form-control" id="property_tax_rate" placeholder="" value="1" onchange="compute()" required>
+                <input type="number" class="form-control" id="property_tax_rate" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Property tax rate is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months">Total Number of Monthly Payments</label>
-                <input type="number" class="form-control" id="months" placeholder="" value="360" onchange="compute()" required>
+                <input type="number" class="form-control" id="months" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Total number of months is required
                 </div>
@@ -473,8 +500,8 @@
                 </div>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="closing_cost_sale">Closing Cost (Buy)</label>
-                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="10000" onchange="compute()" required>
+                <label for="closing_cost_buy">Closing Cost (Buy) <font color="red" size="2">e.g.1% of purchase price</font></label>
+                <input type="number" class="form-control" id="closing_cost_buy" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Purchasing closing cost is required
                 </div>
@@ -485,7 +512,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="insurance">Home Insurance</label>
-                <input type="number" class="form-control" id="insurance" placeholder="" value="1000" onchange="compute()" required>
+                <input type="number" class="form-control" id="insurance" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="pmi_rate">PMI Rate %</label>
@@ -498,47 +525,47 @@
             </div>
 
             <h4 class="mb-3">Estimations</h4>
-            <div class="checkbox">
-              <label><input id="est_linked" type="checkbox" value="" checked="true" onchange="grayout_est_fields()">link estimations to purchase price</label>
+            <div class="checkbox" hidden="true">
+              <label><input id="est_linked" type="checkbox" value="" checked="false" onchange="grayout_est_fields()">link estimations to purchase price</label>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_price">Estimated Resale Price (k)</label>
-                <input type="number" class="form-control" id="estimated_price" placeholder="" value="1200" onchange="compute()" required>
+                <input type="number" class="form-control" id="estimated_price" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Estimated resale price is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="estimated_rental">Estimated Rent</label>
-                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="5000" onchange="compute()" required>
+                <input type="number" class="form-control" id="estimated_rental" placeholder="" value="0" onchange="compute()" required>
                 <div class="invalid-feedback">
                   Estimated rent is required
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (Resale)</label>
-                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="50000" onchange="compute()" required>
+                <input type="number" class="form-control" id="sale_fixing_cost" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="fixing_cost">Fixing-up Cost (Rental)</label>
-                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="5000" onchange="compute()" required>
+                <input type="number" class="form-control" id="rental_fixing_cost" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="commission_rate">Commission Rate</label>
-                <input type="number" class="form-control" id="commission_rate" placeholder="" value="6" onchange="compute()" required>
+                <input type="number" class="form-control" id="commission_rate" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="excise_tax_rate">Excise Tax Rate</label>
-                <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="1.28" onchange="compute()" required>
+                <input type="number" class="form-control" id="excise_tax_rate" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Resale)</label>
-                <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="6" onchange="compute()" required>
+                <input type="number" class="form-control" id="sale_holding_months" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="holding_months">Holding Months (Rental)</label>
-                <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="6" onchange="compute()" required>
+                <input type="number" class="form-control" id="rental_holding_months" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="closing_cost_sale">Closing Cost (Resale)</label>
@@ -546,18 +573,19 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate (%)</label>
-                <input type="number" class="form-control" id="property_management_rate" placeholder="" value="10" onchange="compute()" required>
+                <input type="number" class="form-control" id="property_management_rate" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="maintenance_rate">Maintenance Rate (%)</label>
-                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="0.5" onchange="compute()" required>
+                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_rental">Estimated Months of Rental</label>
-                <input type="number" class="form-control" id="months_rental" placeholder="" value="24" onchange="compute()" required>
+                <input type="number" class="form-control" id="months_rental" placeholder="" value="0" onchange="compute()" required>
               </div>
             </div>
           </form>
+          <a href="#" onclick="reset()"><font size="4" color="red">Reset Fields</font></a>
         </div>
       </div>
 
