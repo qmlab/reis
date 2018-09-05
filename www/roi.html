@@ -371,6 +371,9 @@
   <body class="bg-light">
 
     <div class="container">
+      <div style="position: absolute; top: 0; left: 0; text-align= left">
+        <a href="http://suninvestors.io">Back To Home</a>
+      </div>
       <div class="py-5 text-center">
         <h2>Real Estate Investment ROI Calculator</h2>
         <p class="lead">This is a calculator to estimate your ROI if the property is for resale or rental</p>
@@ -430,7 +433,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price (k)</label>
-                <input type="number" class="form-control" id="total" placeholder="" value="1000" onchange="update_fields(); compute()" required>
+                <input type="number" class="form-control" id="total" placeholder="" value="0" onchange="update_fields(); compute()" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
@@ -540,7 +543,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="closing_cost_sale">Closing Cost (Resale)</label>
-                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="10000" onchange="compute()" required>
+                <input type="number" class="form-control" id="closing_cost_sale" placeholder="" value="0" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="property_management_rate">Property Management Rate (%)</label>
@@ -548,7 +551,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="maintenance_rate">Maintenance Rate (%)</label>
-                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="1" onchange="compute()" required>
+                <input type="number" class="form-control" id="maintenance_rate" placeholder="" value="0.5" onchange="compute()" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="months_rental">Estimated Months of Rental</label>
