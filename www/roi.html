@@ -169,7 +169,6 @@
             var property_management_rate=document.getElementById( "property_management_rate" ).value;
             var maintenance_rate=document.getElementById( "maintenance_rate" ).value;
             var months_rental=document.getElementById( "months_rental" ).value;
-            if (total) {
               $.ajax({
                 type: 'post',
                 url: 'mortgage.php',
@@ -363,7 +362,7 @@
                  $( '#rental_roi' ).html(response);
                 }
               });
-            }
+
           }
         </script>
   </head>
