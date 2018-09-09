@@ -28,7 +28,7 @@
         <script src="assets/js/vendor/popper.min.js"></script>
         <script src="dist/js/bootstrap.min.js"></script>
         <script src="assets/js/vendor/holder.min.js"></script>
-        <script src="node_modules/js-cookie/src/js.cookie.js" />
+        <script src="node_modules/js-cookie/src/js.cookie.js"></script>
         <!-- Facebook Pixel Code -->
         <script>
           !function(f,b,e,v,n,t,s)
@@ -92,7 +92,7 @@
             var addr = get_addr();
             var counter = Cookies.get(addr);
             if (counter == undefined) {
-              Cookies.set(addr, counter, { expires: 1 });
+              Cookies.set(addr, 1, { expires: 1 });
               return true;
             } else if (counter < 1) {
               Cookies.set(addr, counter + 1, { expires: 1 });
