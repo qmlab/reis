@@ -170,27 +170,27 @@
             }
 	        }
 
-          function grayout_closing_fields() {
-            if ($( '#closing_linked' ).is(':checked')) {
-              $( '#closing_cost_buy' ).prop('disabled', true);
-            } else {
-              $( '#closing_cost_buy' ).prop('disabled', false);
-            }
-          }
-
-          function grayout_est_fields() {
-            if ($( '#est_linked' ).is(':checked')) {
-              $( '#estimated_price' ).prop('disabled', true);
-              $( '#estimated_rental' ).prop('disabled', true);
-              $( '#sale_fixing_cost' ).prop('disabled', true);
-              $( '#rental_fixing_cost' ).prop('disabled', true);
-            } else {
-              $( '#estimated_price' ).prop('disabled', false);
-              $( '#estimated_rental' ).prop('disabled', false);
-              $( '#sale_fixing_cost' ).prop('disabled', false);
-              $( '#rental_fixing_cost' ).prop('disabled', false);
-            }
-          }
+          // function grayout_closing_fields() {
+          //   if ($( '#closing_linked' ).is(':checked')) {
+          //     $( '#closing_cost_buy' ).prop('disabled', true);
+          //   } else {
+          //     $( '#closing_cost_buy' ).prop('disabled', false);
+          //   }
+          // }
+          // 
+          // function grayout_est_fields() {
+          //   if ($( '#est_linked' ).is(':checked')) {
+          //     $( '#estimated_price' ).prop('disabled', true);
+          //     $( '#estimated_rental' ).prop('disabled', true);
+          //     $( '#sale_fixing_cost' ).prop('disabled', true);
+          //     $( '#rental_fixing_cost' ).prop('disabled', true);
+          //   } else {
+          //     $( '#estimated_price' ).prop('disabled', false);
+          //     $( '#estimated_rental' ).prop('disabled', false);
+          //     $( '#sale_fixing_cost' ).prop('disabled', false);
+          //     $( '#rental_fixing_cost' ).prop('disabled', false);
+          //   }
+          // }
 
           function send_email() {
             var email = 'maggiesunjingyu@gmail.com';
@@ -583,9 +583,9 @@
               </div>
             </div>
             <h4 class="mb-3">Required Facts</h4>
-            <div class="checkbox" hidden="true">
+            <!-- <div class="checkbox" hidden="true">
               <label hidden="true"><input id="closing_linked" type="checkbox" value="" checked="false" onchange="grayout_closing_fields()">link closing cost to purchase price</label>
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price (k)</label>
@@ -655,9 +655,9 @@
             </div>
 
             <h4 class="mb-3">Estimations</h4>
-            <div class="checkbox" hidden="true">
+            <!-- <div class="checkbox" hidden="true">
               <label><input id="est_linked" type="checkbox" value="" checked="false" onchange="grayout_est_fields()">link estimations to purchase price</label>
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_price">Estimated Resale Price (k)</label>
@@ -744,7 +744,7 @@
             <p>Congratulations! You have found a good ROI. Contact Maggie Sun to see the house: maggiesunjingyu@gmail.com</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Later</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="send_email()">OK</button>
           </div>
         </div>
