@@ -314,7 +314,7 @@
                  $( '#sale_roi' ).html(response);
                  sale_roi_value = parseFloat($('#sale_roi_value').text())/100.0;
                  if (sale_roi_value >= 0.1) {
-                   if (!has_shown_twice()) {
+                   if (!has_shown_once()) {
                      $('#contactModal').modal('show');
                    }
                  } else {
@@ -422,7 +422,7 @@
                  $( '#rental_roi' ).html(response);
                  rental_roi_value = parseFloat($('#rental_roi_value').val())/100.0;
                  if (rental_roi_value >= 0.1) {
-                   if (!has_shown_twice()) {
+                   if (!has_shown_once()) {
                      $('#contactModal').modal('show');
                    }
                  } else {
