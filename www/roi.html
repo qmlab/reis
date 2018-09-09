@@ -93,13 +93,13 @@
             var counter = Cookies.get(addr);
             if (counter == undefined) {
               Cookies.set(addr, 1, { expires: 1 });
-              return true;
+              return false;
             } else if (counter < 1) {
               Cookies.set(addr, counter + 1, { expires: 1 });
-              return true;
+              return false;
             }
 
-            return false;
+            return true;
           }
 
           function reset() {
