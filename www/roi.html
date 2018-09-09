@@ -70,12 +70,13 @@
 
               reset();
               fill_by_params();
-	            update_fields();
               compute();
               fbq('track', 'ViewContent');
             }, false);
           })();
 
+          const Rental_ROI_Threshold = 0.08;
+          const Resale_ROI_Threshold = 0.08;
           var buttonPressed = false;
           $(document).keypress(function(e) {
             if(e.which == 13) {
@@ -159,20 +160,6 @@
               $( '#hoa' ).val(hoa);
             }
           }
-
-      	  function update_fields() {
-            var total = $( '#total' ).val();
-            if ($( '#closing_linked' ).is(':checked')) {
-              $( '#closing_cost_buy' ).val(total * 0.01 * 1000);
-            }
-            if ($( '#est_linked' ).is(':checked')) {
-      	      var total = $( '#total' ).val();
-              $( '#estimated_price' ).val(total * 1.2);
-              $( '#estimated_rental' ).val(total * 0.005 * 1000);
-              $( '#sale_fixing_cost' ).val(total * 0.05 * 1000);
-              $( '#rental_fixing_cost' ).val(total * 0.005 * 1000);
-            }
-	        }
 
           function send_email() {
             var email = 'maggiesunjingyu@gmail.com';
@@ -295,7 +282,7 @@
                 success: function (response) {
                  $( '#sale_roi' ).html(response);
                  sale_roi_value = parseFloat($('#sale_roi_value').text())/100.0;
-                 if (sale_roi_value >= 0.1) {
+                 if (sale_roi_value >= Resale_ROI_Threshold) {
                    if (!has_shown_once() && buttonPressed) {
                      $('#contactModal').modal('show');
                      setButtonPressed(false);
@@ -404,7 +391,7 @@
                 success: function (response) {
                  $( '#rental_roi' ).html(response);
                  rental_roi_value = parseFloat($('#rental_roi_value').val())/100.0;
-                 if (rental_roi_value >= 0.1) {
+                 if (rental_roi_value >= Rental_ROI_Threshold) {
                    if (!has_shown_once() && buttonPressed) {
                      $('#contactModal').modal('show');
                      setButtonPressed(false);
@@ -570,7 +557,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price (k)</label>
-                <input type="number" class="form-control" id="total" placeholder="" value="0" onchange="update_fields(); compute(); setButtonPressed(false)" required>
+                <input type="number" class="form-control" id="total" placeholder="" value="0" onchange="compute();" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
