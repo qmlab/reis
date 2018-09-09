@@ -70,19 +70,23 @@
 
               reset();
               fill_by_params();
-              // grayout_closing_fields();
-              // grayout_est_fields();
 	            update_fields();
               compute();
               fbq('track', 'ViewContent');
             }, false);
           })();
 
+          var buttonPressed = false;
           $(document).keypress(function(e) {
-              if(e.which == 13) {
-                  compute();
-              }
+            if(e.which == 13) {
+              setButtonPressed(true);
+              compute();
+            }
           });
+
+          function setButtonPressed(b) {
+            buttonPressed = b;
+          }
 
           function get_addr() {
             return $('#addr_st1').val() + " " + $('#addr_st2').val() + "," + $('#addr_city').val() + "," + $("#addr_state").val() + "," + $('#addr_country').val() + "," + $('#addr_zip').val();
@@ -169,28 +173,6 @@
               $( '#rental_fixing_cost' ).val(total * 0.005 * 1000);
             }
 	        }
-
-          // function grayout_closing_fields() {
-          //   if ($( '#closing_linked' ).is(':checked')) {
-          //     $( '#closing_cost_buy' ).prop('disabled', true);
-          //   } else {
-          //     $( '#closing_cost_buy' ).prop('disabled', false);
-          //   }
-          // }
-          // 
-          // function grayout_est_fields() {
-          //   if ($( '#est_linked' ).is(':checked')) {
-          //     $( '#estimated_price' ).prop('disabled', true);
-          //     $( '#estimated_rental' ).prop('disabled', true);
-          //     $( '#sale_fixing_cost' ).prop('disabled', true);
-          //     $( '#rental_fixing_cost' ).prop('disabled', true);
-          //   } else {
-          //     $( '#estimated_price' ).prop('disabled', false);
-          //     $( '#estimated_rental' ).prop('disabled', false);
-          //     $( '#sale_fixing_cost' ).prop('disabled', false);
-          //     $( '#rental_fixing_cost' ).prop('disabled', false);
-          //   }
-          // }
 
           function send_email() {
             var email = 'maggiesunjingyu@gmail.com';
@@ -314,8 +296,9 @@
                  $( '#sale_roi' ).html(response);
                  sale_roi_value = parseFloat($('#sale_roi_value').text())/100.0;
                  if (sale_roi_value >= 0.1) {
-                   if (!has_shown_once()) {
+                   if (!has_shown_once() && buttonPressed) {
                      $('#contactModal').modal('show');
+                     setButtonPressed(false);
                    }
                  } else {
                    $('#contactModal').modal('hide');
@@ -422,8 +405,9 @@
                  $( '#rental_roi' ).html(response);
                  rental_roi_value = parseFloat($('#rental_roi_value').val())/100.0;
                  if (rental_roi_value >= 0.1) {
-                   if (!has_shown_once()) {
+                   if (!has_shown_once() && buttonPressed) {
                      $('#contactModal').modal('show');
+                     setButtonPressed(false);
                    }
                  } else {
                    $('#contactModal').modal('hide');
@@ -486,7 +470,7 @@
               <div id="rental_roi"></div>
             </li>
             <li>
-              <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();">Compute</input>
+              <button class="btn btn-primary btn-lg btn-block" type="button" onclick="compute();setButtonPressed(true);">Compute</input>
             </li>
           </ul>
         </div>
@@ -583,13 +567,10 @@
               </div>
             </div>
             <h4 class="mb-3">Required Facts</h4>
-            <!-- <div class="checkbox" hidden="true">
-              <label hidden="true"><input id="closing_linked" type="checkbox" value="" checked="false" onchange="grayout_closing_fields()">link closing cost to purchase price</label>
-            </div> -->
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="total">Purchasing Price (k)</label>
-                <input type="number" class="form-control" id="total" placeholder="" value="0" onchange="update_fields(); compute()" required>
+                <input type="number" class="form-control" id="total" placeholder="" value="0" onchange="update_fields(); compute(); setButtonPressed(false)" required>
                 <div class="invalid-feedback">
                   Total amount is required
                 </div>
@@ -655,9 +636,6 @@
             </div>
 
             <h4 class="mb-3">Estimations</h4>
-            <!-- <div class="checkbox" hidden="true">
-              <label><input id="est_linked" type="checkbox" value="" checked="false" onchange="grayout_est_fields()">link estimations to purchase price</label>
-            </div> -->
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="estimated_price">Estimated Resale Price (k)</label>
