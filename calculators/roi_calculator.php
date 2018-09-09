@@ -34,7 +34,8 @@ class SellingROICalculator {
 
   public function getExpense(): float{
     $payment = $this->mc->getPayment();
-    return $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $payment * $this->holding_months + $this->fixing_cost + $this->closing_cost;
+    $interest_expense = $this->mc->getInterestExpense($this->holding_months);
+    return $this->estimated_price * ($this->commission_rate + $this->excise_tax_rate) / 100 + $interest_expense + $this->fixing_cost + $this->closing_cost;
   }
 
   public function getEarning(): float {

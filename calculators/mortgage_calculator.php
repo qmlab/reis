@@ -12,4 +12,12 @@ class MortgageCalculator {
     $principal_interest = $loan * $rate * pow(1 + $rate, $this->months) / (pow(1 + $rate, $this->months) - 1);
     return $principal_interest + $tax + $pmi + $this->insurance / 12 + $hoa;
   }
+
+  public function getInterestExpense(int $months_paid): float {
+    $loan = $this->total * (1 - $this->downpay_ratio / 100);
+    $rate = $this->interest_rate / 12 / 100;
+    $payment = $this->getPayment();
+    $loan_balance = $loan * (pow(1 + $rate, $this->months) - pow(1 + $rate, $months_paid)) / (pow(1 + $rate, $this->months) - 1);
+    return $loan_balance + $payment * $months_paid - $loan;
+  }
 }
